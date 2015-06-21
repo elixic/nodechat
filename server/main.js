@@ -21,7 +21,7 @@ io.on('connection', function(socket){
 
     socket.on('globalMessage', function(message) {
         log(message);
-        socket.broadcast.emit('globalMessage', message);
+        io.emit('globalMessage', message);
     });
 
     socket.on('disconnect', function(){
