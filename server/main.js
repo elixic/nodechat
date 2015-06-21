@@ -18,7 +18,13 @@ io = require('socket.io')(server);
 
 io.on('connection', function(socket){
     console.log('a user connected');
-      socket.on('disconnect', function(){
+
+    socket.on('global message', function(message) {
+        log(message);
+        socket.broadcast.emit('global message', message);
+    });
+
+    socket.on('disconnect', function(){
             console.log('user disconnected');
               });
 });
