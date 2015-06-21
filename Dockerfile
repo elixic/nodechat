@@ -1,4 +1,4 @@
-FROM google/nodejs-runtime
+FROM node
 
 RUN useradd -ms /bin/bash node
 COPY . /home/node/app
