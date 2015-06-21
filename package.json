@@ -1,0 +1,23 @@
+{
+  "name": "node-chat",
+  "version": "0.0.1",
+  "description": "Node Chat",
+  "license": "Apache",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/elixic/nodechat"
+  },
+  "author": "Isaac Flemming",
+  "homepage": "http://imagoddamn.ninja",
+  "dependencies": {
+    "bluebird": "^2.9.13",
+    "debug": "^2.1.3",
+    "express": "^4.12.0",
+    "socket.io": "^1.3.5"
+  },
+  "devDependencies": {
+  },
+  "scripts": {
+    "start": "node app.js"
+  }
+}
