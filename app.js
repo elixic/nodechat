@@ -1,2 +1,2 @@
 'use script';
-require('./server/app/main.js');
+require('./server/main.js');

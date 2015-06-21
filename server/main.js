@@ -4,7 +4,7 @@ var express = require('express'),
     log = require('debug')('app:main'),
     app = express();
 
-app.use(express.static('server/public'));
+app.use(express.static('public'));
 
 var server = app.listen(9001, function() {
     var host = server.address().host,
