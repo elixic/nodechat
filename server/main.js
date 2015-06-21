@@ -19,9 +19,9 @@ io = require('socket.io')(server);
 io.on('connection', function(socket){
     console.log('a user connected');
 
-    socket.on('global message', function(message) {
+    socket.on('globalMessage', function(message) {
         log(message);
-        socket.broadcast.emit('global message', message);
+        socket.broadcast.emit('globalMessage', message);
     });
 
     socket.on('disconnect', function(){
