@@ -5,13 +5,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width", initial-scale=1>
-    <title>FCA</title>
+    <title>FAC</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
   </head>
 
   <body>
-    <h1>Fucking Awesome Chat (a.k.a. FCA)</h1>
+    <h1>Fucking Awesome Chat (a.k.a. FAC)</h1>
 
     <div id="chatDiv" style="width:400px;height:200px;overflow: scroll;">
       <ul id="messages" class="list-group">
@@ -30,15 +30,20 @@
     <script>
         var socket = io();
 
+        // chat send
         $('form').submit(function(){
           socket.emit('globalMessage', $('#m').val());
           $('#m').val('');
           return false;
         });
 
+
+        // globalMessage handler
         socket.on('globalMessage', function(msg){
-          console.log("I was here, bitch."); 
+          // add message to chat list
           $('#messages').append($('<li class="list-group-item">').text(msg));
+
+          // ensure we're scrolled to the end so you can see the new content
           var objDiv = document.getElementById("chatDiv");
           objDiv.scrollTop = objDiv.scrollHeight;
         });
