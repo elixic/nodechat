@@ -1,5 +1,6 @@
 * { box-sizing: border-box; }
 
 
+#m {width:80%;}
 #messages li:nth-child(odd) {background: #eee; }
 
