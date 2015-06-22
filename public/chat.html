@@ -31,6 +31,8 @@
       </div>
     </div>
 
+    <embed src="sounds/ding.mp3" autostart="false" width="0" height="0" id="ding" enablejavascript="true">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
@@ -54,6 +56,12 @@
           // ensure we're scrolled to the end so you can see the new content
           var objDiv = document.getElementById("chatDiv");
           objDiv.scrollTop = objDiv.scrollHeight;
+          PlayOneShot("ding");
         });
+
+        function PlayOneShot(soundObj) {
+          var sound = document.getElementById(soundObj);
+          sound.Play();
+        }
     </script>
 </html>
