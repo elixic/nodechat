@@ -1,10 +1,12 @@
 'use strict';
 
 var express = require('express'),
+    cookies = require('cookie-parser'),
     log = require('debug')('app:main'),
     app = express(),
     server, io;
 
+app.use(cookies("asdf1234-elixic-klank-ritethis"));
 app.use(express.static('public'));
 
 server = app.listen(9001, function() {
@@ -15,12 +17,19 @@ server = app.listen(9001, function() {
 });
 
 app.get('/', function(req, res) {
-        res.cookie('connected', 1);
-
-    if(!req.cookie.connected) {
+    if(!req.cookies.username) {
         res.redirect('/login.html');
     } else {
-        res.reirect('/chat.html');
+        res.redirect('/chat.html');
+    }
+});
+
+app.get('/login', function(req, res) {
+    if (req.username) {
+        res.cookie('username', req.username);
+        res.redirect('/chat.html');
+    } else {
+        res.send(403);
     }
 });
 
