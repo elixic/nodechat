@@ -1,0 +1,5 @@
+* { box-sizing: border-box; }
+
+
+#messages li:nth-child(odd) {background: #eee; }
+
