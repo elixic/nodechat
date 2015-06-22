@@ -14,6 +14,16 @@ server = app.listen(9001, function() {
     log("services app listening at http://" + host + ":" + port);
 });
 
+app.get('/', function(req, res) {
+        res.cookie('connected', 1);
+
+    if(!req.cookie.connected) {
+        res.redirect('/login.html');
+    } else {
+        res.reirect('/chat.html');
+    }
+});
+
 io = require('socket.io')(server);
 
 io.on('connection', function(socket){
