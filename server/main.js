@@ -2,11 +2,14 @@
 
 var express = require('express'),
     cookies = require('cookie-parser'),
+    bodyparser = require('body-parser'),
     log = require('debug')('app:main'),
     app = express(),
     server, io;
 
 app.use(cookies("asdf1234-elixic-klank-ritethis"));
+app.use(bodyparser.json());
+app.use(bodyparser.urlencoded({extended: true}));
 app.use(express.static('public'));
 
 server = app.listen(9001, function() {
@@ -24,9 +27,10 @@ app.get('/', function(req, res) {
     }
 });
 
-app.get('/login', function(req, res) {
-    if (req.username) {
-        res.cookie('username', req.username);
+app.post('/login', function(req, res) {
+    log(req);
+    if (req.body.username) {
+        res.cookie('username', req.body.username);
         res.redirect('/chat.html');
     } else {
         res.send(403);

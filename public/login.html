@@ -9,13 +9,15 @@
 </head>
 <body>
     <div name="login-body" class="center">
-    <h1>Login Here</h1>
-    <div class="input-group">
-        <input type="text" name="username" class="form-control" placeholder="Enter Nick Name..." />
-        <span class="input-group-btn">
-            <button class="btn btn-default" name="send"><span class="glyphicon glyphicon-send">&nbsp;</span></button>
-        </span>
-    </div>
+        <h1>Login Here</h1>
+        <form name="loginForm" action="/login" method="post">
+            <div class="input-group">
+                <input type="text" name="username" class="form-control" placeholder="Enter Nick Name..." />
+                <span class="input-group-btn">
+                    <button class="btn btn-default" name="send" type="submit"><span class="glyphicon glyphicon-send">&nbsp;</span></button>
+                </span>
+            </div>
+        </form>
     </div>
 </body>
 </html>
