@@ -12,6 +12,9 @@ app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({extended: true}));
 app.use(express.static('public'));
 
+app.set('views', './views');
+app.set('view engine', 'jade');
+
 server = app.listen(9001, function() {
     var host = server.address().host,
         port = server.address().port;
@@ -21,9 +24,9 @@ server = app.listen(9001, function() {
 
 app.get('/', function(req, res) {
     if(!req.cookies.username) {
-        res.redirect('/login.html');
+        res.render('login');
     } else {
-        res.redirect('/chat.html');
+        res.render('chat');
     }
 });
 

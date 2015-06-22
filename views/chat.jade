@@ -1,0 +1,32 @@
+doctype html
+
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title FAC
+
+    link(href='css/bootstrap.min.css', rel='stylesheet')
+    link(href='css/chat.css', rel='stylesheet')
+
+  body
+    
+    div(style='height:100vh')
+      div
+        h1 Fucking Awesome Chat (a.k.a. FAC)
+
+      div(id='chatDiv', style='max-height:80%;overflow:scroll')
+        ul(id='messages', class='list-group')
+      div
+        form(class='form-inline', action='')
+          input(id='m', type='text', class='form-control', autocomplete='off', placeholder='Type Your Shit Here')
+          button Send
+
+    embed(src='sounds/ding.mp3', autostart='false', width='0', height='0', id='ding', enablejavascript='true')
+
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
+    script(src='js/lib/bootstrap.min.js')
+    script(src='/socket.io/socket.io.js')
+
+    script(src='js/chat.js')
