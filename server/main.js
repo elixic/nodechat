@@ -34,7 +34,7 @@ app.post('/login', function(req, res) {
     log(req);
     if (req.body.username) {
         res.cookie('username', req.body.username);
-        res.redirect('/chat.html');
+        res.redirect('chat');
     } else {
         res.send(403);
     }
