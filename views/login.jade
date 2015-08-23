@@ -1,17 +1,17 @@
 doctype html
-    html
-        head
-            link(rel='stylesheet', href='css/main.css', type='text/css')
-            link(rel='stylesheet', href='css/bootstrap.min.css', type='text/css')
-            script(type='text/javascript', language='JavaScript', src='js/lib/jquery-1.11.3.js')
-            script(type='application/javascript', language='javascript', src='js/lib/bootstrap.min.js')
-            title Login Page
-    body
-        div(name='login-body', class='center')
-            h1 Login Here
-            form(name='loginForm', action='/login', method='post')
-                div(class='input-group')
-                    input(type='text', name='username', class='form-control', placeholder='Enter Nick Name...')
-                    span(class='input-group-btn')
-                        button(class='btn btn-default', name='send', type='submit')
-                            span(class='glyphicon glyphicon-send') &nbsp;
+html
+    head
+        link(rel='stylesheet', href='css/main.css', type='text/css')
+        link(rel='stylesheet', href='css/bootstrap.min.css', type='text/css')
+        script(type='text/javascript', language='JavaScript', src='js/lib/jquery-1.11.3.js')
+        script(type='application/javascript', language='javascript', src='js/lib/bootstrap.min.js')
+        title Login Page
+body
+    div(name='login-body', class='center')
+        h1 Login Here
+        form(name='loginForm', action='/login', method='post')
+            div(class='input-group')
+                input(type='text', name='username', class='form-control', placeholder='Enter Nick Name...')
+                span(class='input-group-btn')
+                    button(class='btn btn-default', name='send', type='submit')
+                        span(class='glyphicon glyphicon-send') &nbsp;
