@@ -16,9 +16,14 @@ html(lang='en')
       div
         h1 Fucking Awesome Chat (a.k.a. FAC)
 
-      div(id='chatDiv', style='max-height:80%;overflow:scroll')
-        ul(id='messages', class='list-group')
-      div
+      div(style='overflow:scroll;max-height:80%',id='chatDiv')
+        div(class='main-chat')
+          ul(id='messages', class='list-group')
+        div(class='online-users')
+          ul(id='user-list', class='list-group')
+            li User1
+            li User2
+      div(class='input-div')
         form(class='form-inline', action='')
           input(id='m', type='text', class='form-control', autocomplete='off', placeholder='Type Your Shit Here')
           button Send

@@ -4,3 +4,16 @@
 #m {width:80%;}
 #messages li:nth-child(odd) {background: #eee; }
 
+.main-chat {
+  float: left;
+  max-height:80%;
+  overflow:scroll;
+}
+
+.online-users {
+  float: none;
+}
+
+.input-div {
+  float: none;
+}
