@@ -5,6 +5,7 @@ var express = require('express'),
     bodyparser = require('body-parser'),
     log = require('debug')('app:main'),
     mem = require('memory-cache'),
+    userUtil = require('./users'),
     app = express(),
     server, io;
 
@@ -31,7 +32,7 @@ app.get('/', function(req, res) {
         res.render('login');
     } else {
         res.render('chat');
-        require('./users').add(mem, req.cookies.username);
+        userUtil.add(mem, req.cookies.username);
     }
 });
 

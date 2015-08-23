@@ -1,4 +1,4 @@
-exports.remove = function (mem, user) {
+function remove (mem, user) {
   var users = mem.get('users');
   if (users !== 'undefine') {
     console.log(' fuck this ... ');
@@ -9,7 +9,7 @@ exports.remove = function (mem, user) {
   }
 };
 
-exports.add = function (mem, user) {
+function add (mem, user) {
   users = mem.get('users');
   if (users === 'undefine') {
     users = [];
@@ -17,4 +17,9 @@ exports.add = function (mem, user) {
 
   users.push(user);
   mem.put('users', users);
+};
+
+module.exports = {
+  add: add,
+  remove: remove
 };
