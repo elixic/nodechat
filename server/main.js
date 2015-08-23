@@ -4,6 +4,7 @@ var express = require('express'),
     cookies = require('cookie-parser'),
     bodyparser = require('body-parser'),
     log = require('debug')('app:main'),
+    mem = require('memory-cache'),
     app = express(),
     server, io;
 
@@ -17,7 +18,10 @@ app.set('view engine', 'jade');
 
 server = app.listen(9001, function() {
     var host = server.address().host,
-        port = server.address().port;
+        port = server.address().port,
+        users = [];
+
+    mem.put('users', users);
 
     log("services app listening at http://" + host + ":" + port);
 });
@@ -27,6 +31,7 @@ app.get('/', function(req, res) {
         res.render('login');
     } else {
         res.render('chat');
+        require('./users').add(mem, req.cookies.usersname);
     }
 });
 
@@ -44,6 +49,8 @@ io = require('socket.io')(server);
 
 io.on('connection', function(socket){
     console.log('a user connected');
+
+    io.emit('updatUsers', mem.get('users'));
 
     socket.on('globalMessage', function(message) {
         log(message);
