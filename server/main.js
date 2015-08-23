@@ -31,7 +31,7 @@ app.get('/', function(req, res) {
         res.render('login');
     } else {
         res.render('chat');
-        require('./users').add(mem, req.cookies.usersname);
+        require('./users').add(mem, req.cookies.username);
     }
 });
 
@@ -49,6 +49,8 @@ io = require('socket.io')(server);
 
 io.on('connection', function(socket){
     console.log('a user connected');
+
+    console.log(mem.get('users'));
 
     io.emit('updatUsers', mem.get('users'));
 
