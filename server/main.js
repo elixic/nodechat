@@ -53,7 +53,7 @@ io.on('connection', function(socket){
 
     console.log(mem.get('users'));
 
-    io.emit('updatUsers', mem.get('users'));
+    io.emit('updateUsers', mem.get('users'));
 
     socket.on('globalMessage', function(message) {
         log(message);

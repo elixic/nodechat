@@ -20,6 +20,19 @@ socket.on('globalMessage', function(msg){
     PlayOneShot("ding");
 });
 
+socket.on('updateUsers', function(users){
+  console.log("updateUsers: " + users);
+
+  // clear out the users
+  $('#user-list').html("");
+
+  // update the list to include the users
+  var arrayLength = users.length;
+  for (var i = 0; i < arrayLength; i++) {
+    $('#user-list').append("<li>" + users[i] + "</li>");
+  }
+});
+
 function PlayOneShot(soundObj) {
     var sound = document.getElementById(soundObj);
     sound.Play();
