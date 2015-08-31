@@ -1,7 +1,7 @@
 'use strict';
 
 var express = require('express'),
-    cookies = require('cookie-parser'),
+    cookieparser = require('cookie-parser'),
     bodyparser = require('body-parser'),
     log = require('debug')('app:main'),
     mem = require('memory-cache'),
@@ -9,7 +9,7 @@ var express = require('express'),
     app = express(),
     server, io;
 
-app.use(cookies("asdf1234-elixic-klank-ritethis"));
+app.use(cookieparser("asdf1234-elixic-klank-ritethis"));
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({extended: true}));
 app.use(express.static('public'));
@@ -52,6 +52,16 @@ io.on('connection', function(socket){
     console.log('a user connected');
 
     console.log(mem.get('users'));
+
+    var cookie=socket.handshake.headers['cookie'];
+
+    // cookie looks like "io=CgejXGM81UsPl3UMAAAA; username=klank"
+
+//    var real_cookies = cookieparser.JSONCookie(cookie);
+    var real_cookies = cookieparser.signedCookie(cookie,"asdf1234-elixic-klank-ritethis");
+
+    console.log(real_cookies); // normally ends up just being the starting string
+    console.log(real_cookies.username)
 
     io.emit('updateUsers', mem.get('users'));
 
