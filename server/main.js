@@ -64,8 +64,14 @@ io.on('connection', function(socket){
     io.emit('updateUsers', mem.get('users'));
 
     socket.on('globalMessage', function(message) {
-        log(message);
-        io.emit('globalMessage', message);
+      var chatMessage = {};
+      log(message);
+
+      // build up message object to send
+      chatMessage.sender = socket.handshake.session.username;
+      chatMessage.message = message;
+      
+      io.emit('globalMessage', chatMessage);
     });
 
     socket.on('disconnect', function(){
