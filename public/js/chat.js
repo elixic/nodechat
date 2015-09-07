@@ -12,7 +12,7 @@ $('form').submit(function(){
 // globalMessage handler
 socket.on('globalMessage', function(msg){
     // add message to chat list
-    $('#messages').append($('<li class="list-group-item">').text(msg));
+    $('#messages').append($('<li class="list-group-item">').text(msg.sender + ": " + msg.message));
 
     // ensure we're scrolled to the end so you can see the new content
     var objDiv = document.getElementById("chatDiv");

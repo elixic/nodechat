@@ -1,15 +1,22 @@
 'use strict';
 
 var express = require('express'),
-    cookies = require('cookie-parser'),
+    Session = require('express-session'),
     bodyparser = require('body-parser'),
     log = require('debug')('app:main'),
     mem = require('memory-cache'),
     userUtil = require('./users'),
     app = express(),
-    server, io;
+    server, io, ios,
+    secret = "asdf1234-elixic-klank-ritethis",
+    session = Session({
+      secret: secret,
+      resave: false,
+      saveUninitialized: true
+    });
 
-app.use(cookies("asdf1234-elixic-klank-ritethis"));
+// seupt the session stuff
+app.use(session);
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({extended: true}));
 app.use(express.static('public'));
@@ -28,18 +35,18 @@ server = app.listen(9001, function() {
 });
 
 app.get('/', function(req, res) {
-    if(!req.cookies.username) {
+    if(!req.session.username) {
         res.render('login');
     } else {
         res.render('chat');
-        userUtil.add(mem, req.cookies.username);
+        userUtil.add(mem, req.session.username);
     }
 });
 
 app.post('/login', function(req, res) {
     log(req);
     if (req.body.username) {
-        res.cookie('username', req.body.username);
+        req.session.username = req.body.username;
         res.redirect('chat');
     } else {
         res.send(403);
@@ -47,20 +54,27 @@ app.post('/login', function(req, res) {
 });
 
 io = require('socket.io')(server);
-
+ios = require('socket.io-express-session');
+io.use(ios(session));
 io.on('connection', function(socket){
     console.log('a user connected');
-
     console.log(mem.get('users'));
+    console.log(socket.handshake.session.username);
 
     io.emit('updateUsers', mem.get('users'));
 
     socket.on('globalMessage', function(message) {
-        log(message);
-        io.emit('globalMessage', message);
+      var chatMessage = {};
+      log(message);
+
+      // build up message object to send
+      chatMessage.sender = socket.handshake.session.username;
+      chatMessage.message = message;
+      
+      io.emit('globalMessage', chatMessage);
     });
 
     socket.on('disconnect', function(){
             console.log('user disconnected');
-              });
+    });
 });
